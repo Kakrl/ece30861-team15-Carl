@@ -3,6 +3,7 @@ import logging
 import os
 import re
 import ssl
+import sys
 
 import aiohttp
 
@@ -106,6 +107,7 @@ class GenAIClient:
             prompt = f.read()
         prompt += readme_text
         response = await self.chat(prompt)
+        print(f"DEBUG: GenAI returned: '{response}'", file=sys.stderr)
 
         # Try to extract a floating point number from the response
         # Handle various possible formats from LLM
