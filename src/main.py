@@ -234,6 +234,7 @@ async def process_entries(
         for i, result in enumerate(results):
             if isinstance(result, Exception):
                 logging.error("An analysis task failed: %s", result)
+                print("An analysis task failed: %s", result, file=sys.stderr)
                 # failed entries
                 entry = entries[i]
                 code_link, dataset_link, model_link = entry
