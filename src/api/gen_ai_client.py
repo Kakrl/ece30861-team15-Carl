@@ -68,7 +68,7 @@ class GenAIClient:
         ) as f:
             extraction_prompt = f.read()
         extraction_prompt += readme_text
-        print(f"DEBUG: Stage 1 - Sending extraction prompt to GenAI", file=sys.stderr)####################################
+        print(f"DEBUG: Stage 1 - Sending extraction prompt to GenAI\nprompt: {extraction_prompt}", file=sys.stderr)####################################
         extraction_response = await self.chat(extraction_prompt)
         print(f"DEBUG: Stage 1 - GenAI extraction response: '{extraction_response}'", file=sys.stderr)#####################
 
@@ -78,7 +78,7 @@ class GenAIClient:
         ) as f:
             conversion_prompt = f.read()
         conversion_prompt += "\n" + extraction_response
-        print(f"DEBUG: Stage 2 - Sending conversion prompt to GenAI", file=sys.stderr)####################################
+        print(f"DEBUG: Stage 2 - Sending conversion prompt to GenAI\nprompt: {conversion_prompt}", file=sys.stderr)####################################
         json_response = await self.chat(conversion_prompt)
         print(f"DEBUG: Stage 2 - GenAI conversion response: '{json_response}'", file=sys.stderr)#######################################
 
@@ -110,6 +110,7 @@ class GenAIClient:
         with open("src/api/readme_clarity_ai_prompt.txt", "r") as f:
             prompt = f.read()
         prompt += readme_text
+        print(f"DEBUG: Sending clarity prompt to GenAI\nprompt: {prompt}", file=sys.stderr)####################################
         response = await self.chat(prompt)
         print(f"DEBUG: GenAI returned: '{response}'", file=sys.stderr)#######################################
 
